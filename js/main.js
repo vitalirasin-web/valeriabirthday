@@ -222,15 +222,9 @@
   });
 
   // ---------- אתחול ----------
+  // השער (עוגה + בחירת שפה) מוצג בכל כניסה; השפה השמורה משמשת רק כברירת מחדל לרקע
   let saved = null;
   try { saved = localStorage.getItem('lera-lang'); } catch (e) {}
-  if (saved && C[saved]) {
-    setLang(saved);
-    $('gate').classList.add('hidden');
-  } else {
-    // ברירת מחדל בזמן שהשער מוצג
-    setLang('he');
-    try { localStorage.removeItem('lera-lang'); } catch (e) {}
-  }
+  setLang(saved && C[saved] ? saved : 'he');
   try { if (localStorage.getItem('lera-unlocked') === '1') unlockVenue(false); } catch (e) {}
 })();
