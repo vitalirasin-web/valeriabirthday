@@ -451,3 +451,22 @@ footer a { color: var(--brown); font-weight: 600; }
   .lang-switch { padding: .25rem .6rem; font-size: .8rem; }
   .nav-right { gap: .35rem; }
 }
+
+/* ---- Number-34 candle & skip ---- */
+.candles { bottom: 100px; }
+.candle.num {
+  width: auto; height: auto; background: none; box-shadow: none; padding: 0 6px 6px;
+}
+.candle.num::after { display: none; }
+.candle.num .digits {
+  display: block; font-family: var(--display); font-size: 4.2rem; line-height: 1; letter-spacing: .02em;
+  color: var(--red); -webkit-text-stroke: 2px #fff;
+  text-shadow: 0 3px 0 #8f0b10, 0 6px 12px rgba(70, 32, 0, .25);
+  background: repeating-linear-gradient(-45deg, var(--red) 0 7px, #fff 7px 14px);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.candle.num .flame { top: -30px; width: 20px; height: 30px; }
+.candle.num .smoke { top: -36px; }
+.gate-tools { display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+.skip-btn { background: none; border: none; color: var(--brown-soft); font-weight: 600; font-size: .95rem; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.skip-btn:hover { color: var(--red); }

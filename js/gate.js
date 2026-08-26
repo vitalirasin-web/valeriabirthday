@@ -1,7 +1,6 @@
 // מסך כניסה: עוגה עם נרות – מכבים בלחיצה או בנשיפה למיקרופון, ואז בוחרים שפה
 (function () {
   const $ = (id) => document.getElementById(id);
-  const COLORS = ['#d20f17', '#f8bd15', '#cfe3dd', '#5a2628', '#f0bcae'];
   let left = 0, stream = null, raf = null;
 
   function blow(c) {
@@ -16,7 +15,7 @@
   function allOut() {
     stopMic();
     $('gate-hint').textContent = 'יאללה, נכנסים! 🎉 · Заходим!';
-    $('mic-btn').hidden = true;
+    $('mic-btn').hidden = true; $('skip-btn').hidden = true;
     $('gate-options').hidden = false;
     $('gate-options').classList.add('show');
     if (window.SFX) SFX.win();
@@ -60,19 +59,21 @@
   window.initGate = function () {
     const box = $('candles');
     box.innerHTML = '';
-    left = COLORS.length;
-    COLORS.forEach(col => {
-      const c = document.createElement('button');
-      c.className = 'candle'; c.type = 'button'; c.setAttribute('aria-label', 'candle');
-      c.style.setProperty('--c', col);
-      c.innerHTML = '<span class="flame"></span><span class="smoke"></span>';
-      c.addEventListener('click', () => blow(c));
-      box.appendChild(c);
-    });
+    left = 1;
+    const c = document.createElement('button');
+    c.className = 'candle num'; c.type = 'button'; c.setAttribute('aria-label', 'candle 34');
+    c.innerHTML = '<span class="flame"></span><span class="smoke"></span><span class="digits">34</span>';
+    c.addEventListener('click', () => blow(c));
+    box.appendChild(c);
     const mic = $('mic-btn');
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       mic.hidden = false;
       mic.addEventListener('click', startMic, { once: true });
     }
+    $('skip-btn').addEventListener('click', () => {
+      stopMic();
+      $('gate-hint').hidden = true; $('mic-btn').hidden = true; $('skip-btn').hidden = true;
+      $('gate-options').hidden = false; $('gate-options').classList.add('show');
+    });
   };
 })();
