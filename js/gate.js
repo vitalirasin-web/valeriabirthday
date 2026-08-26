@@ -66,10 +66,11 @@
     c.addEventListener('click', () => blow(c));
     box.appendChild(c);
     const mic = $('mic-btn');
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      mic.hidden = false;
-      mic.addEventListener('click', startMic, { once: true });
-    }
+    mic.hidden = false;
+    mic.addEventListener('click', () => {
+      mic.classList.add('listening');
+      document.querySelectorAll('.candle:not(.out)').forEach((c, i) => setTimeout(() => blow(c), 250 + i * 120));
+    }, { once: true });
     $('skip-btn').addEventListener('click', () => {
       stopMic();
       $('gate-hint').hidden = true; $('mic-btn').hidden = true; $('skip-btn').hidden = true;
