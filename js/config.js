@@ -21,7 +21,12 @@ window.PARTY_CONFIG = {
 
   // ★ גלריית זיכרונות: שימו תמונות ב-assets/images/gallery והוסיפו כאן שורה לכל תמונה
   gallery: [
-    { src: "assets/images/gallery/01.jpg", he: "המשפחה 💛", ru: "Наша семья 💛" }
+    { src: "assets/images/gallery/01.jpg", he: "המשפחה 💛", ru: "Наша семья 💛" },
+    { src: "assets/images/gallery/02.jpg", he: "אמא ושתי הבנות – סלפי בלובי 📸", ru: "Мама и две дочки – селфи в лобби 📸" },
+    { src: "assets/images/gallery/03.jpg", he: "על שפת המכתש 🏜️", ru: "На краю кратера 🏜️" },
+    { src: "assets/images/gallery/04.jpg", he: "ערב באילת 🌴", ru: "Вечер в Эйлате 🌴" },
+    { src: "assets/images/gallery/05.jpg", he: "כולנו על המזח 🌊", ru: "Все вместе на пирсе 🌊" },
+    { src: "assets/images/gallery/06.jpg", he: "לרה. פשוט לרה 💗", ru: "Лера. Просто Лера 💗" }
   ],
 
   // ---------------------- עברית ----------------------
