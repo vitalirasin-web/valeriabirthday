@@ -61,4 +61,26 @@
     }
   };
   window.SFX = SFX;
+
+  // ---------- מוזיקת רקע ----------
+  const music = document.getElementById('bg-music');
+  const mbtn = document.getElementById('music-btn');
+  let fade = null;
+  function setBtn() { if (mbtn) mbtn.textContent = music.paused ? '🎵' : '⏸'; mbtn && mbtn.classList.toggle('playing', !music.paused); }
+  const MUSIC = {
+    play() {
+      if (!music) return;
+      clearInterval(fade);
+      music.volume = 0;
+      music.play().then(() => {
+        fade = setInterval(() => { music.volume = Math.min(0.7, music.volume + 0.05); if (music.volume >= 0.7) clearInterval(fade); }, 120);
+        setBtn();
+      }).catch(() => setBtn());
+    },
+    pause() { if (!music) return; clearInterval(fade); music.pause(); setBtn(); },
+    toggle() { music.paused ? MUSIC.play() : MUSIC.pause(); }
+  };
+  if (mbtn) mbtn.addEventListener('click', MUSIC.toggle);
+  if (music) { music.addEventListener('play', setBtn); music.addEventListener('pause', setBtn); }
+  window.MUSIC = MUSIC;
 })();

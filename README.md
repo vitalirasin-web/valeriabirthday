@@ -15,6 +15,7 @@ js/gallery.js       גלריית זיכרונות + lightbox
 js/sfx.js           צלילים מסונתזים + רטט
 js/main.js          שפה, טריוויה וחשיפת היעד
 assets/images/      family.jpg, benedict-ashdod.jpg, benedict-logo.png, gallery/ (תמונות לגלריה)
+assets/audio/       song.mp3 – מוזיקת רקע (מתחילה אחרי כיבוי הנר, כפתור 🎵 בניווט)
 .nojekyll           מגיש את הקבצים כמו שהם, בלי Jekyll
 ```
 

@@ -14,6 +14,7 @@
 
   function allOut() {
     stopMic();
+    if (window.MUSIC) MUSIC.play();
     $('gate-hint').textContent = 'יאללה, נכנסים! 🎉 · Заходим!';
     $('mic-btn').hidden = true;
     $('gate-options').hidden = false;
