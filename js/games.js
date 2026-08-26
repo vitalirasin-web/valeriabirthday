@@ -13,6 +13,7 @@
     if (done.has(key)) return;
     done.add(key);
     el.classList.add('done');
+    if (window.SFX) SFX.win();
     const o = originOf(el);
     burst(o.x, o.y, 90);
     $('games-count').textContent = G.count(done.size, 4);
@@ -37,6 +38,7 @@
     fill.style.height = '0%'; face.textContent = '😴'; stage.classList.remove('brewing');
     btn.onclick = () => {
       n++;
+      if (window.SFX) SFX.pour();
       fill.style.height = Math.min(100, n / c.clicks * 100) + '%';
       stage.classList.add('brewing');
       $('cup').classList.remove('wobble'); void $('cup').offsetWidth; $('cup').classList.add('wobble');
@@ -65,6 +67,7 @@
       s.onclick = () => {
         if (s.classList.contains('peeled')) return;
         s.classList.add('peeled');
+        if (window.SFX) SFX.pop();
         const o = originOf(s); burst(o.x, o.y, 14);
         if (--left === 0) { $('mirror-label').textContent = st.done; finish('stickers', $('g-stickers')); }
       };
@@ -90,6 +93,7 @@
     pup.onclick = () => {
       if (pup.disabled) return;
       caught++; speed = Math.max(350, speed - 220);
+      if (window.SFX) SFX.bark();
       bark.textContent = d.barks[(caught - 1) % d.barks.length];
       bark.style.left = pup.style.left; bark.style.top = pup.style.top;
       bark.classList.remove('show'); void bark.offsetWidth; bark.classList.add('show');
@@ -123,6 +127,7 @@
       bl.onclick = () => {
         if (bl.classList.contains('pop')) return;
         bl.classList.add('pop');
+        if (window.SFX) SFX.pop();
         const o = originOf(bl); burst(o.x, o.y, 18);
         left--; status.textContent = left ? b.left(left) : b.done;
         if (!left) finish('balloons', $('g-balloons'));

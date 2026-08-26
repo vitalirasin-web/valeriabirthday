@@ -16,9 +16,14 @@
   <!-- שער בחירת שפה -->
   <div class="gate" id="gate" role="dialog" aria-label="בחירת שפה / Выбор языка">
     <div class="brand">Benedict</div>
-    <div class="cake">🎂</div>
+    <div class="cake-wrap">
+      <div class="candles" id="candles"></div>
+      <div class="cake-layers"><div class="layer top"></div><div class="layer mid"></div><div class="layer bot"></div><div class="plate"></div></div>
+    </div>
     <h1>יום ההולדת של לרה <span>День рождения Леры</span></h1>
-    <div class="gate-options">
+    <p class="gate-hint" id="gate-hint">כבו את הנרות 🕯️ · Задуйте свечи</p>
+    <button class="mic-btn" id="mic-btn" type="button" hidden>🎤 לנשוף · Подуть</button>
+    <div class="gate-options" id="gate-options" hidden>
       <button class="lang-btn" data-lang="he">עברית <small>המשך בעברית</small></button>
       <button class="lang-btn" data-lang="ru">Русский <small>Продолжить на русском</small></button>
     </div>
@@ -31,7 +36,10 @@
       <a href="#quiz" id="nav-quiz"></a>
       <a href="#venue-section" id="nav-venue"></a>
     </div>
-    <button class="lang-switch" id="lang-switch" aria-label="Switch language"></button>
+    <div class="nav-right">
+      <button class="lang-switch sfx-btn" id="sfx-btn" aria-label="Sound"></button>
+      <button class="lang-switch" id="lang-switch" aria-label="Switch language"></button>
+    </div>
   </nav>
 
   <header class="hero">
@@ -44,6 +52,16 @@
         <span class="line" id="hero-l3"></span>
       </h1>
       <a href="#about" class="btn" id="hero-cta"></a>
+      <div class="countdown" id="countdown">
+        <div class="cd-title" id="cd-title"></div>
+        <div class="cd-grid">
+          <div class="cd-cell"><div class="cd-val" id="cd-d"></div><div class="cd-lbl" id="cdl-d"></div></div>
+          <div class="cd-cell"><div class="cd-val" id="cd-h"></div><div class="cd-lbl" id="cdl-h"></div></div>
+          <div class="cd-cell"><div class="cd-val" id="cd-m"></div><div class="cd-lbl" id="cdl-m"></div></div>
+          <div class="cd-cell"><div class="cd-val" id="cd-s"></div><div class="cd-lbl" id="cdl-s"></div></div>
+        </div>
+        <div class="cd-msg" id="cd-msg"></div>
+      </div>
     </div>
     <div class="hero-photos">
       <img class="photo-main" src="assets/images/family.jpg" alt="">
@@ -56,6 +74,19 @@
       <p id="about-lead"></p>
     </div>
     <div class="facts" id="facts"></div>
+  </section>
+
+  <section class="section" id="memories" hidden>
+    <div class="section-head">
+      <h2 id="gal-title"></h2>
+      <p id="gal-lead"></p>
+    </div>
+    <div class="gallery">
+      <button class="gal-arrow prev" id="gal-prev" aria-label="prev">‹</button>
+      <div class="gal-track" id="gal-track"></div>
+      <button class="gal-arrow next" id="gal-next" aria-label="next">›</button>
+    </div>
+    <div class="gal-dots" id="gal-dots"></div>
   </section>
 
   <section class="section" id="games">
@@ -127,6 +158,18 @@
     </div>
   </section>
 
+  <section class="section" id="wish">
+    <div class="section-head">
+      <h2 id="wish-title"></h2>
+      <p id="wish-lead"></p>
+    </div>
+    <div class="wish-card">
+      <div class="wish-emojis" id="wish-emojis"></div>
+      <textarea id="wish-text" rows="4"></textarea>
+      <a class="btn wish-send" id="wish-send" target="_blank" rel="noopener"></a>
+    </div>
+  </section>
+
   <section class="section" id="venue-section">
     <div class="section-head">
       <h2 id="venue-title"></h2>
@@ -153,10 +196,20 @@
             <a class="btn ghost" id="maps-link" target="_blank" rel="noopener"></a>
           </div>
           <a class="btn menu-link" id="menu-link" href="https://cdn.shopify.com/s/files/1/0531/3953/8111/files/1.pdf?v=1785674929" target="_blank" rel="noopener"></a>
+          <div class="ticket-actions secondary">
+            <a class="btn ghost" id="gcal-link" target="_blank" rel="noopener"></a>
+            <a class="btn ghost" id="ics-link" download="lera-birthday.ics"></a>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lb-close" id="lb-close" aria-label="close">✕</button>
+    <img id="lb-img" alt="">
+    <p id="lb-cap"></p>
+  </div>
 
   <footer>
     <img class="footer-photo" src="assets/images/benedict-ashdod.jpg" alt="Benedict Ashdod">
@@ -167,6 +220,10 @@
   </footer>
 
   <script src="js/config.js"></script>
+  <script src="js/sfx.js"></script>
+  <script src="js/countdown.js"></script>
+  <script src="js/gate.js"></script>
+  <script src="js/gallery.js"></script>
   <script src="js/games.js"></script>
   <script src="js/main.js"></script>
 </body>

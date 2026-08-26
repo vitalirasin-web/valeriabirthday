@@ -27,6 +27,9 @@
     $('hero-l2').textContent = T.heroLine2;
     $('hero-l3').textContent = T.heroLine3;
     $('hero-cta').textContent = T.heroCta;
+    window.initCountdown(T, C.venue.datetime);
+    window.initGallery(C.gallery, lang, T);
+    $('sfx-btn').textContent = (window.SFX && SFX.enabled) ? T.sfxOn : T.sfxOff;
 
     $('about-title').textContent = T.aboutTitle;
     $('about-lead').textContent = T.aboutLead;
@@ -60,6 +63,14 @@
     $('maps-link').textContent = T.maps;
 
     $('menu-link').textContent = T.menuLink;
+    $('gcal-link').textContent = T.calendar.google;
+    $('ics-link').textContent = T.calendar.apple;
+    buildCalendar();
+    $('wish-title').textContent = T.wishText.title;
+    $('wish-lead').textContent = T.wishText.lead;
+    $('wish-text').placeholder = T.wishText.placeholder;
+    $('wish-send').textContent = T.wishText.send;
+    updateWish();
     $('footer-text').textContent = T.footer;
 
     // quiz restart in the new language
@@ -75,6 +86,41 @@
     $('gate').classList.add('hidden');
   }));
   $('lang-switch').addEventListener('click', () => setLang(lang === 'he' ? 'ru' : 'he'));
+  $('sfx-btn').addEventListener('click', () => { const on = SFX.toggle(); $('sfx-btn').textContent = on ? T.sfxOn : T.sfxOff; });
+  window.initGate();
+
+  // ---------- יומן ----------
+  const fmtUTC = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  function buildCalendar() {
+    const start = new Date(C.venue.datetime);
+    const end = new Date(start.getTime() + (C.venue.durationHours || 2) * 3600000);
+    const title = T.calendar.event, loc = `Benedict, ${T.venueAddress}`, desc = location.href.split('#')[0];
+    $('gcal-link').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+      + `&text=${encodeURIComponent(title)}&dates=${fmtUTC(start)}/${fmtUTC(end)}`
+      + `&location=${encodeURIComponent(loc)}&details=${encodeURIComponent(desc)}`;
+    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Lera Birthday//HE', 'BEGIN:VEVENT',
+      'UID:lera-birthday-2026@family', `DTSTAMP:${fmtUTC(new Date())}`, `DTSTART:${fmtUTC(start)}`, `DTEND:${fmtUTC(end)}`,
+      `SUMMARY:${title}`, `LOCATION:${loc}`, `DESCRIPTION:${desc}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    $('ics-link').href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+  }
+
+  // ---------- ברכה ב-WhatsApp ----------
+  const EMOJIS = ['💛', '🎂', '🥂', '🍳', '🎉', '😘'];
+  $('wish-emojis').innerHTML = EMOJIS.map(e => `<button type="button" class="emoji-chip">${e}</button>`).join('');
+  $('wish-emojis').querySelectorAll('.emoji-chip').forEach(b => b.addEventListener('click', () => {
+    const ta = $('wish-text'); ta.value += (ta.value && !ta.value.endsWith(' ') ? ' ' : '') + b.textContent; ta.focus(); updateWish();
+    if (window.SFX) SFX.pop();
+  }));
+  try { $('wish-text').value = localStorage.getItem('lera-wish') || ''; } catch (e) {}
+  $('wish-text').addEventListener('input', updateWish);
+  function updateWish() {
+    const txt = $('wish-text').value.trim();
+    try { localStorage.setItem('lera-wish', $('wish-text').value); } catch (e) {}
+    const phone = ((C.wish && C.wish.phone) || '').replace(/\D/g, '');
+    const msg = `${T.wishText.prefix}\n${txt}`;
+    $('wish-send').href = (phone ? `https://wa.me/${phone}` : 'https://wa.me/') + `?text=${encodeURIComponent(msg)}`;
+    $('wish-send').classList.toggle('disabled', !txt);
+  }
 
   // ---------- עובדות: הופעה בגלילה ----------
   function observeFacts() {
@@ -104,6 +150,7 @@
     el.classList.add('unlocked');
     try { localStorage.setItem('lera-unlocked', '1'); } catch (e) {}
     if (celebrate) {
+      if (window.SFX) SFX.win();
       confetti({ particleCount: 180, spread: 100, origin: { y: 0.6 }, colors: ['#d20f17', '#f8bd15', '#fdf8df', '#75401c'] });
       setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 900);
     }
@@ -138,6 +185,7 @@
     } else if (chosen === q.answer) {
       buttons[q.answer].classList.add('correct');
       score++;
+      if (window.SFX) SFX.pop();
       confetti({ particleCount: 35, spread: 55, origin: { y: 0.75 }, colors: ['#d20f17', '#f8bd15', '#fdf8df'] });
     } else {
       buttons[q.answer].classList.add('correct');

@@ -9,8 +9,12 @@ index.html          עמוד המשפחה (הראשי – חובה בשורש)
 css/style.css       עיצוב
 js/config.js        ★ כל הטקסטים בעברית וברוסית + פרטי המקום (בנדיקט, ביג אשדוד, 28.08 16:30)
 js/games.js         4 מיני-משחקים (קפה, מדבקות, אנג'ל, בלונים)
+js/gate.js          מסך כניסה: עוגה עם נרות (לחיצה / נשיפה למיקרופון)
+js/countdown.js     ספירה לאחור
+js/gallery.js       גלריית זיכרונות + lightbox
+js/sfx.js           צלילים מסונתזים + רטט
 js/main.js          שפה, טריוויה וחשיפת היעד
-assets/images/      family.jpg (תמונת המשפחה), benedict-ashdod.jpg (הסניף), benedict-logo.png (לוגו)
+assets/images/      family.jpg, benedict-ashdod.jpg, benedict-logo.png, gallery/ (תמונות לגלריה)
 .nojekyll           מגיש את הקבצים כמו שהם, בלי Jekyll
 ```
 
@@ -18,6 +22,8 @@ assets/images/      family.jpg (תמונת המשפחה), benedict-ashdod.jpg (�
 
 פותחים את `js/config.js`. הטקסטים מחולקים לבלוק `he` ולבלוק `ru`; פרטי הניווט ב-`venue.query`.
 העמוד נפתח בבורר שפה, והבחירה נשמרת בדפדפן.
+
+למלא ב-`config.js`: `wish.phone` (מספר ויטלי לברכות ב-WhatsApp) ו-`gallery` (תמונות ב-`assets/images/gallery/`).
 
 ## העלאה ל-GitHub Pages
 

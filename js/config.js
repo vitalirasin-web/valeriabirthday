@@ -8,11 +8,21 @@ window.PARTY_CONFIG = {
   venue: {
     date: "28.08",
     time: "16:30",
+    datetime: "2026-08-28T16:30:00+03:00", // לספירה לאחור וליומן
+    durationHours: 2,
     // חיפוש בניווט (עובד גם ב-Waze וגם ב-Google Maps)
     query: "Benedict, HaRakevet 1, Ashdod",
     mapsUrl: "",   // אופציונלי – אם ריק נבנה מ-query
     wazeUrl: ""    // אופציונלי – אם ריק נבנה מ-query
   },
+
+  // ★ ברכות ב-WhatsApp: המספר של ויטלי בפורמט בינלאומי בלי + (למשל 972501234567). ריק = בחירת איש קשר
+  wish: { phone: "" },
+
+  // ★ גלריית זיכרונות: שימו תמונות ב-assets/images/gallery והוסיפו כאן שורה לכל תמונה
+  gallery: [
+    { src: "assets/images/gallery/01.jpg", he: "המשפחה 💛", ru: "Наша семья 💛" }
+  ],
 
   // ---------------------- עברית ----------------------
   he: {
@@ -76,6 +86,12 @@ window.PARTY_CONFIG = {
     waze: "נווטו ב-Waze",
     maps: "Google Maps",
 
+    countdown: { title: "עוד רגע חוגגים", days: "ימים", hours: "שעות", minutes: "דקות", seconds: "שניות", today: "היום! 🎉 נתראה ב-16:30", past: "היה מדהים 💛" },
+    galleryTitle: "רגעים עם לרה 📸",
+    galleryLead: "קצת זיכרונות מהדרך – לחצו על תמונה להגדלה",
+    wishText: { title: "כתבו ברכה ללרה 💌", lead: "מה שתכתבו כאן יישלח ב-WhatsApp ויוקרא לה בברנץ'", placeholder: "לרה, מזל טוב! …", send: "שלחו ב-WhatsApp", prefix: "🎂 ברכה ללרה:" },
+    calendar: { google: "Google Calendar 📅", apple: "iPhone / Outlook 📅", event: "יום ההולדת של לרה – ברנץ' בבנדיקט" },
+    sfxOn: "🔊", sfxOff: "🔇",
     menuLink: "לתפריט של בנדיקט 📄",
     footer: "נבנה באהבה למשפחה",
     langSwitch: "Русский"
@@ -143,6 +159,12 @@ window.PARTY_CONFIG = {
     waze: "Навигация в Waze",
     maps: "Google Maps",
 
+    countdown: { title: "Скоро праздник", days: "дней", hours: "часов", minutes: "минут", seconds: "секунд", today: "Сегодня! 🎉 Увидимся в 16:30", past: "Было чудесно 💛" },
+    galleryTitle: "Моменты с Лерой 📸",
+    galleryLead: "Немного воспоминаний – нажмите на фото, чтобы увеличить",
+    wishText: { title: "Напишите Лере пожелание 💌", lead: "Текст отправится в WhatsApp и будет зачитан на бранче", placeholder: "Лера, с днём рождения! …", send: "Отправить в WhatsApp", prefix: "🎂 Пожелание Лере:" },
+    calendar: { google: "Google Calendar 📅", apple: "iPhone / Outlook 📅", event: "День рождения Леры – бранч в Benedict" },
+    sfxOn: "🔊", sfxOff: "🔇",
     menuLink: "Меню Benedict 📄",
     footer: "Сделано с любовью для семьи",
     langSwitch: "עברית"
