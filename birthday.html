@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יום ההולדת של ולריה! 🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;800&family=Heebo:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-color: #fafafa;
+            --text-main: #2d3748;
+            --primary: #ff4b72;
+            --secondary: #ff85a2;
+            --card-bg: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box; margin: 0; padding: 0;
+            font-family: 'Assistant', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; padding-bottom: 5rem; }
+
+        /* Spoil Meter */
+        .spoil-meter-container {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            padding: 1rem 2rem; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;
+        }
+        .spoil-meter-container h3 { font-family: 'Heebo', sans-serif; color: var(--primary); margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .progress-bar-bg { background: #e2e8f0; height: 12px; border-radius: 20px; overflow: hidden; position: relative; }
+        .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ff85a2, #ff4b72); border-radius: 20px; transition: width 0.5s; }
+
+        /* Hero */
+        .hero {
+            height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; background: linear-gradient(135deg, #fff0f3, #ffe4e8); padding: 2rem; margin-top: 60px;
+        }
+        h1 { font-family: 'Heebo', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); color: var(--primary); margin-bottom: 1rem; }
+
+        /* Container */
+        .timeline-container { max-width: 700px; margin: 2rem auto; padding: 0 1.5rem; display: flex; flex-direction: column; gap: 2rem; }
+        
+        .timeline-card {
+            background: var(--card-bg); padding: 2rem; border-radius: var(--radius);
+            box-shadow: var(--shadow); border: 2px solid transparent; transition: all 0.3s ease;
+        }
+        .timeline-card.completed { border-color: #48bb78; background: #f0fff4; }
+        .timeline-card h3 { font-family: 'Heebo', sans-serif; font-size: 1.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .time-badge { display: inline-block; background: var(--primary); color: white; padding: 0.2rem 0.8rem; border-radius: 8px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1rem; }
+
+        /* Buttons Custom */
+        .action-btn { background: #2d3748; color: white; border: none; padding: 1rem 2rem; border-radius: 50px; font-size: 1.2rem; font-weight: bold; cursor: pointer; margin-top: 1rem; transition: all 0.2s; }
+        .action-btn:active { transform: scale(0.95); }
+        .action-btn.done { background: #48bb78; cursor: default; pointer-events: none; }
+
+        /* Game Elements */
+        .chores-container { display: flex; justify-content: space-around; margin-top: 1rem; }
+        .chore-bubble { width: 70px; height: 70px; background: white; border: 2px solid #cbd5e1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; cursor: pointer; transition: all 0.2s; }
+        .chore-bubble.popped { transform: scale(0); opacity: 0; pointer-events: none; }
+
+        /* Stickers Game */
+        .stickers-area { position: relative; height: 120px; background: #e2e8f0; border-radius: 12px; margin-top: 1rem; overflow: hidden; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #a0aec0;}
+        .sticker { position: absolute; font-size: 2rem; cursor: pointer; transition: transform 0.2s; }
+        .sticker:hover { transform: scale(1.2) rotate(10deg); }
+
+        /* Kiss Game */
+        .kiss-area { position: relative; height: 100px; margin-top: 1rem; overflow: hidden; background: #fff0f3; border-radius: 12px; }
+        .kiss-me { position: absolute; font-size: 2.5rem; cursor: pointer; transition: 0.1s; animation: jumpAround 2s infinite; }
+        @keyframes jumpAround {
+            0% { top: 10%; left: 10%; }
+            25% { top: 60%; left: 80%; }
+            50% { top: 20%; left: 50%; }
+            75% { top: 70%; left: 20%; }
+            100% { top: 10%; left: 10%; }
+        }
+
+        /* Radio Game */
+        .radio-box { background: #3182ce; color: white; padding: 1.5rem; border-radius: 12px; margin-top: 1rem; text-align: center; animation: shake 0.5s infinite; }
+        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-3px) rotate(-1deg); } 75% { transform: translateX(3px) rotate(1deg); } 100% { transform: translateX(0); } }
+        .radio-box.chill { animation: none; background: #48bb78; }
+
+        /* Evening Section */
+        #evening-section { opacity: 0.5; pointer-events: none; filter: grayscale(100%); transition: all 1s ease; }
+        #evening-section.unlocked { opacity: 1; pointer-events: auto; filter: grayscale(0%); border: 2px solid var(--primary); }
+        
+        .choice-btn { background: #f1f5f9; border: 2px solid transparent; padding: 1rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; color: #334155; cursor: pointer; transition: all 0.3s; display: flex; justify-content: space-between; width: 100%; margin-bottom: 0.5rem; }
+        .choice-btn.selected-forced { background: rgba(255, 75, 114, 0.1); border-color: var(--primary); color: var(--primary); transform: scale(1.05); }
+
+        /* Overlay */
+        .success-overlay { display: none; position: fixed; inset: 0; background: rgba(255, 255, 255, 0.95); z-index: 2000; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; animation: fadeIn 0.3s ease; }
+        .success-overlay h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    </style>
+</head>
+<body>
+
+    <div class="spoil-meter-container">
+        <h3>מד הפינוק של ולריה: <span id="meter-text">0%</span> 💖</h3>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="meter-fill"></div></div>
+    </div>
+
+    <section class="hero">
+        <h1>בוקר טוב ולריה! 🎈</h1>
+        <p style="font-size: 1.3rem; max-width: 500px;">
+            הערב חוגגים! אבל כדי לגלות לאן אנחנו יוצאים, את צריכה לעבור את מסלול המכשולים של הבית ולהביא את המד ל-100%. מוכנה?
+        </p>
+    </section>
+
+    <div class="timeline-container">
+        
+        <!-- 1. קפה -->
+        <div class="timeline-card" id="card-1">
+            <div class="time-badge">משימה #1</div>
+            <h3>השכמה של מלכות ☕</h3>
+            <p>אי אפשר להתחיל בלי הקפה שלך. תפעילי את המכונה!</p>
+            <button class="action-btn" id="btn1" onclick="completeTask(1, this, 'הקפה מוכן! ✨')">לחיצה להכנת קפה</button>
+        </div>
+
+        <!-- 2. מדבקות -->
+        <div class="timeline-card" id="card-2">
+            <div class="time-badge">משימה #2</div>
+            <h3>מתקפת המדבקות 🦄</h3>
+            <p>אמיליה וסופיה הדביקו לך מדבקות על כל מראת האיפור. קלפי את שלושתן כדי שתוכלי להתארגן!</p>
+            <div class="stickers-area" id="stickers-bg">המראה שלך
+                <div class="sticker" style="top: 20px; left: 30px;" onclick="removeSticker(this)">🎀</div>
+                <div class="sticker" style="top: 60px; right: 40px;" onclick="removeSticker(this)">⭐</div>
+                <div class="sticker" style="top: 10px; right: 120px;" onclick="removeSticker(this)">🦄</div>
+            </div>
+        </div>
+
+        <!-- 3. ארון הבגדים -->
+        <div class="timeline-card" id="card-3">
+            <div class="time-badge">משימה #3</div>
+            <h3>"אין לי מה ללבוש!" 👗</h3>
+            <p>תחפרי בארון עד שתמצאי את ההופעה לערב.</p>
+            <button class="action-btn" id="outfitBtn" onclick="changeOutfit()" style="width: 100%; background:#4a5568;">הופעה נוכחית: פיג'מת פלנל ענקית 🦥</button>
+        </div>
+
+        <!-- 4. מטלות -->
+        <div class="timeline-card" id="card-4">
+            <div class="time-badge">משימה #4</div>
+            <h3>לפוצץ את המטלות 🧹</h3>
+            <p>למי יש כוח? תלחצי על המטלות כדי להעלים אותן.</p>
+            <div class="chores-container">
+                <div class="chore-bubble" onclick="popChore(this)">🧺</div>
+                <div class="chore-bubble" onclick="popChore(this)">🧹</div>
+                <div class="chore-bubble" onclick="popChore(this)">📱</div>
+            </div>
+        </div>
+
+        <!-- 5. רדיו בלואי -->
+        <div class="timeline-card" id="card-5">
+            <div class="time-badge">משימה #5</div>
+            <h3>הפסקת אש מוזיקלית 🎶</h3>
+            <p>הרדיו בסלון נתקע שוב על שיר הפתיחה של בלואי! תעבירי תחנה מהר.</p>
+            <div class="radio-box" id="radioBox">
+                <h4 id="radioText" style="margin-bottom:10px;">🎵 מנגן עכשיו: פתיח "בלואי" (בפעם המאה)</h4>
+                <button class="action-btn" style="background:white; color:black; font-size:1rem;" onclick="fixRadio(this)">החלף תחנה 📻</button>
+            </div>
+        </div>
+
+        <!-- 6. נשיקה -->
+        <div class="timeline-card" id="card-6">
+            <div class="time-badge">משימה #6</div>
+            <h3>נשיקה בהפתעה 😘</h3>
+            <p>אני מנסה לגנוב לך נשיקה! תתפסי אותי.</p>
+            <div class="kiss-area">
+                <div class="kiss-me" onclick="catchKiss(this)">🙋‍♂️</div>
+            </div>
+        </div>
+
+        <!-- 7. אנג'ל -->
+        <div class="timeline-card" id="card-7">
+            <div class="time-badge">משימה #7</div>
+            <h3>לעייף את אנג'ל 🐕</h3>
+            <p>חייבים לרוקן לה קצת אנרגיה לפני שיוצאים. תלחצי מהר 5 פעמים כדי לזרוק לה את הכדור!</p>
+            <button class="action-btn" id="dogBtn" onclick="throwBall(this)" style="background:#ed8936;">זרוק כדור (0/5) 🎾</button>
+        </div>
+
+        <!-- 8. הסיום -->
+        <div class="timeline-card" id="evening-section">
+            <div class="time-badge">השלב הסופי: 20:30 בערב</div>
+            <h3 id="lock-title">🔒 החלק הזה נעול!</h3>
+            
+            <div id="dinner-content" style="display: none;">
+                <h3>הגענו ליעד! לאן יוצאים? 🍽️</h3>
+                <p>הבטחתי שאת מחליטה היום! תבחרי לאן בא לך שנצא:</p>
+                <div class="choice-section">
+                    <button class="choice-btn" onclick="trickSelection(this)">סושי ואסייתי קליל 🍣 <span class="circle-check">⭕</span></button>
+                    <button class="choice-btn" onclick="trickSelection(this)">איטלקי, פסטות ויין 🍝 <span class="circle-check">⭕</span></button>
+                    <button class="choice-btn" id="realChoice" onclick="trickSelection(this)">המסעדה המטורפת שכבר שריינתי לנו 🥂 <span class="circle-check">⭕</span></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="success-overlay" id="successOverlay">
+        <h2>איזה טלפתיה! 🎯</h2>
+        <p>בחרת בדיוק במסעדה שכבר הזמנתי אליה מקום מראש. מדהים!</p>
+        <p style="font-size: 1rem; margin-top: 1rem; color: #718096;">(לא באמת חשבת שאני אתן לך לשבור את הראש ביום הולדת, נכון?)</p>
+        <button class="action-btn" style="margin-top:2rem;" onclick="document.getElementById('successOverlay').style.display='none'">אני מוכנה, בוא נצא!</button>
+    </div>
+
+    <script>
+        let progress = 0;
+        const totalTasks = 7; // מספר המשימות הנדרשות
+        const progressStep = 100 / totalTasks; 
+        
+        let completedTasks = new Set();
+
+        function updateProgress(taskId) {
+            if (completedTasks.has(taskId)) return;
+            completedTasks.add(taskId);
+            
+            progress += progressStep;
+            if (progress > 99) progress = 100;
+            
+            document.getElementById('meter-fill').style.width = progress + '%';
+            document.getElementById('meter-text').innerText = Math.round(progress) + '%';
+            document.getElementById('card-' + taskId).classList.add('completed');
+            
+            confetti({ particleCount: 30, spread: 50, origin: { y: 0.3 } });
+
+            if (progress >= 100) setTimeout(unlockEvening, 800);
+        }
+
+        // 1. כפתור פשוט
+        function completeTask(id, btn, text) {
+            btn.innerText = text;
+            btn.classList.add('done');
+            updateProgress(id);
+        }
+
+        // 2. מדבקות
+        let stickersLeft = 3;
+        function removeSticker(el) {
+            el.style.display = 'none';
+            stickersLeft--;
+            if (stickersLeft === 0) {
+                document.getElementById('stickers-bg').innerText = 'המראה נקייה! ✨';
+                updateProgress(2);
+            }
+        }
+
+        // 3. ארון בגדים
+        let outfitClicks = 0;
+        function changeOutfit() {
+            const btn = document.getElementById('outfitBtn');
+            outfitClicks++;
+            if (outfitClicks === 1) {
+                btn.innerText = "בגדי ספורט מוכתמים באקווה קול 🎨";
+            } else if (outfitClicks === 2) {
+                btn.innerText = "טי שירט של סוף מסלול מתקופת הצבא 🪖";
+            } else if (outfitClicks >= 3) {
+                btn.innerText = "השמלה המושלמת! מצאת! ✨👗";
+                btn.classList.add('done');
+                updateProgress(3);
+            }
+        }
+
+        // 4. מטלות
+        let choresPopped = 0;
+        function popChore(el) {
+            if (el.classList.contains('popped')) return;
+            el.classList.add('popped');
+            choresPopped++;
+            if (choresPopped === 3) updateProgress(4);
+        }
+
+        // 5. רדיו
+        function fixRadio(btn) {
+            const box = document.getElementById('radioBox');
+            box.classList.add('chill');
+            document.getElementById('radioText').innerText = "🎵 מנגן עכשיו: שקט ושלווה של הורים / פלייליסט של גדולים 🍷";
+            btn.style.display = 'none';
+            updateProgress(5);
+        }
+
+        // 6. נשיקה
+        function catchKiss(el) {
+            el.style.animation = 'none';
+            el.innerText = "😘💖";
+            el.style.top = '25%'; el.style.left = '40%'; el.style.transform = 'scale(1.5)';
+            updateProgress(6);
+        }
+
+        // 7. אנג'ל
+        let ballThrows = 0;
+        function throwBall(btn) {
+            ballThrows++;
+            if (ballThrows < 5) {
+                btn.innerText = `זרוק כדור (${ballThrows}/5) 🎾`;
+                // אפקט קפיצה קטן
+                btn.style.transform = 'scale(1.1)';
+                setTimeout(() => btn.style.transform = 'scale(1)', 100);
+            } else {
+                btn.innerText = "אנג'ל נרדמה! ששש... 😴🐕";
+                btn.classList.add('done');
+                btn.style.background = '#48bb78';
+                updateProgress(7);
+            }
+        }
+
+        // סיום - חשיפת המסעדה
+        function unlockEvening() {
+            const eveningSec = document.getElementById('evening-section');
+            eveningSec.classList.add('unlocked');
+            document.getElementById('lock-title').innerText = "🔓 יעד הפינוק הושג!";
+            document.getElementById('dinner-content').style.display = 'block';
+            
+            confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+            setTimeout(() => eveningSec.scrollIntoView({ behavior: 'smooth' }), 1000);
+        }
+
+        function trickSelection() {
+            const allBtns = document.querySelectorAll('.choice-btn');
+            allBtns.forEach(btn => {
+                btn.classList.remove('selected-forced');
+                btn.querySelector('.circle-check').innerText = '⭕';
+            });
+            const realChoiceBtn = document.getElementById('realChoice');
+            
+            setTimeout(() => {
+                realChoiceBtn.classList.add('selected-forced');
+                realChoiceBtn.querySelector('.circle-check').innerText = '✅';
+                confetti({ particleCount: 200, spread: 90, origin: { y: 0.5 } });
+                setTimeout(() => document.getElementById('successOverlay').style.display = 'flex', 800);
+            }, 400); 
+        }
+    </script>
+</body>
+</html>
