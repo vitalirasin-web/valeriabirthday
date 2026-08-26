@@ -26,7 +26,7 @@ window.PARTY_CONFIG = {
     { src: "assets/images/gallery/03.jpg", he: "על שפת המכתש 🏜️", ru: "На краю кратера 🏜️" },
     { src: "assets/images/gallery/04.jpg", he: "ערב באילת 🌴", ru: "Вечер в Эйлате 🌴" },
     { src: "assets/images/gallery/05.jpg", he: "כולנו על המזח 🌊", ru: "Все вместе на пирсе 🌊" },
-    { src: "assets/images/gallery/06.jpg", he: "לרה. פשוט לרה 💗", ru: "Лера. Просто Лера 💗" }
+    { src: "assets/images/gallery/06.jpg", he: "לרה 💛", ru: "Лера 💛" }
   ],
 
   // ---------------------- עברית ----------------------
