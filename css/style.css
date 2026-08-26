@@ -436,8 +436,12 @@ footer a { color: var(--brown); font-weight: 600; }
 .wish-send.disabled { opacity: .45; pointer-events: none; }
 
 /* ================= Calendar buttons ================= */
-.ticket-actions.secondary { margin-top: .7rem; }
-.ticket-actions.secondary .btn { font-size: .9rem; padding: .7rem .9rem; }
+.ticket-actions.secondary { margin-top: .9rem; gap: 1.2rem; justify-content: center; }
+.ticket-actions.secondary .btn {
+  flex: 0 0 auto; background: none; border: none; color: var(--brown-soft); font-size: .85rem; font-weight: 600;
+  padding: .2rem 0; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(117, 64, 28, .35);
+}
+.ticket-actions.secondary .btn:hover { color: var(--red); background: none; transform: none; box-shadow: none; }
 
 @media (max-width: 560px) {
   .gal-arrow { display: none; }
