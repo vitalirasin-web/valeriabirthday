@@ -15,7 +15,7 @@
   function allOut() {
     stopMic();
     $('gate-hint').textContent = 'יאללה, נכנסים! 🎉 · Заходим!';
-    $('mic-btn').hidden = true; $('skip-btn').hidden = true;
+    $('mic-btn').hidden = true;
     $('gate-options').hidden = false;
     $('gate-options').classList.add('show');
     if (window.SFX) SFX.win();
@@ -71,10 +71,5 @@
       mic.classList.add('listening');
       document.querySelectorAll('.candle:not(.out)').forEach((c, i) => setTimeout(() => blow(c), 250 + i * 120));
     }, { once: true });
-    $('skip-btn').addEventListener('click', () => {
-      stopMic();
-      $('gate-hint').hidden = true; $('mic-btn').hidden = true; $('skip-btn').hidden = true;
-      $('gate-options').hidden = false; $('gate-options').classList.add('show');
-    });
   };
 })();
