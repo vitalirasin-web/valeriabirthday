@@ -26,6 +26,10 @@
     $('games-title').textContent = g.title;
     $('games-lead').textContent = g.lead;
     $('games-count').textContent = g.count(done.size, 4);
+    [['coffee', g.coffee], ['stickers', g.stickers], ['dog', g.dog], ['balloons', g.balloons]].forEach(([k, c]) => {
+      $(k + '-title').textContent = c.title;
+      $(k + '-text').textContent = c.text;
+    });
     coffee(g.coffee); stickers(g.stickers); dog(g.dog); balloons(g.balloons);
   };
 
