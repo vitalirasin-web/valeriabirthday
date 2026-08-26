@@ -33,7 +33,7 @@ window.PARTY_CONFIG = {
   he: {
     dir: "rtl",
     title: "יום ההולדת של לרה",
-    heroKicker: "המשפחה מוזמנת",
+    heroKicker: "שמחים להזמינכם",
     heroLine1: "קצת על לרה,",
     heroLine2: "משחק קטן,",
     heroLine3: "ואז – לאן הולכים.",
@@ -106,7 +106,7 @@ window.PARTY_CONFIG = {
   ru: {
     dir: "ltr",
     title: "День рождения Леры",
-    heroKicker: "Семья приглашается",
+    heroKicker: "Рады пригласить вас",
     heroLine1: "Немного о Лере,",
     heroLine2: "маленькая игра,",
     heroLine3: "а потом – куда идём.",
