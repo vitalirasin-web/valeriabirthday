@@ -49,7 +49,6 @@
     $('goto-venue').textContent = T.gotoVenue;
 
     $('venue-title').textContent = T.venueTitle;
-    $('lock-text').textContent = T.lockMsg;
     $('venue-kicker').textContent = T.venueKicker;
     $('venue-name').textContent = T.venueName;
     $('venue-sub').textContent = T.venueSub;
@@ -145,10 +144,6 @@
 
   function unlockVenue(celebrate) {
     const el = $('venue');
-    if (el.classList.contains('unlocked')) return;
-    el.classList.remove('locked');
-    el.classList.add('unlocked');
-    try { localStorage.setItem('lera-unlocked', '1'); } catch (e) {}
     if (celebrate) {
       if (window.SFX) SFX.win();
       confetti({ particleCount: 180, spread: 100, origin: { y: 0.6 }, colors: ['#d20f17', '#f8bd15', '#fdf8df', '#75401c'] });
@@ -226,5 +221,4 @@
   let saved = null;
   try { saved = localStorage.getItem('lera-lang'); } catch (e) {}
   setLang(saved && C[saved] ? saved : 'he');
-  try { if (localStorage.getItem('lera-unlocked') === '1') unlockVenue(false); } catch (e) {}
 })();
