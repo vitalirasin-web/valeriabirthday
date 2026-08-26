@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>יום ההולדת של לרה</title>
+  <meta name="description" content="עמוד משפחתי ליום ההולדת של לרה – קצת עליה, טריוויה, ולאן הולכים">
+  <meta name="theme-color" content="#fdf8df">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Abril+Fatface&family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- שער בחירת שפה -->
+  <div class="gate" id="gate" role="dialog" aria-label="בחירת שפה / Выбор языка">
+    <div class="brand">Benedict</div>
+    <div class="cake">🎂</div>
+    <h1>יום ההולדת של לרה <span>День рождения Леры</span></h1>
+    <div class="gate-options">
+      <button class="lang-btn" data-lang="he">עברית <small>המשך בעברית</small></button>
+      <button class="lang-btn" data-lang="ru">Русский <small>Продолжить на русском</small></button>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-links">
+      <a href="#about" id="nav-about"></a>
+      <a href="#games" id="nav-games"></a>
+      <a href="#quiz" id="nav-quiz"></a>
+      <a href="#venue-section" id="nav-venue"></a>
+    </div>
+    <button class="lang-switch" id="lang-switch" aria-label="Switch language"></button>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-text">
+      <span class="kicker" id="hero-kicker"></span>
+      <div class="title-big" id="hero-title"></div>
+      <h1>
+        <span class="line" id="hero-l1"></span>
+        <span class="line" id="hero-l2"></span>
+        <span class="line" id="hero-l3"></span>
+      </h1>
+      <a href="#about" class="btn" id="hero-cta"></a>
+    </div>
+    <div class="hero-photos">
+      <img class="photo-main" src="assets/images/family.jpg" alt="">
+    </div>
+  </header>
+
+  <section class="section" id="about">
+    <div class="section-head">
+      <h2 id="about-title"></h2>
+      <p id="about-lead"></p>
+    </div>
+    <div class="facts" id="facts"></div>
+  </section>
+
+  <section class="section" id="games">
+    <div class="section-head">
+      <h2 id="games-title"></h2>
+      <p id="games-lead"></p>
+      <div class="games-score"><span id="games-count"></span></div>
+    </div>
+    <div class="games">
+
+      <!-- 1. Coffee -->
+      <div class="game" id="g-coffee">
+        <div class="game-head"><h3 id="coffee-title"></h3><p id="coffee-text"></p></div>
+        <div class="coffee-stage">
+          <div class="steam" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="cup" id="cup"><div class="fill" id="cup-fill"></div><span class="cup-face" id="cup-face">😴</span></div>
+        </div>
+        <button class="btn" id="coffee-btn"></button>
+      </div>
+
+      <!-- 2. Stickers -->
+      <div class="game" id="g-stickers">
+        <div class="game-head"><h3 id="stickers-title"></h3><p id="stickers-text"></p></div>
+        <div class="mirror" id="mirror">
+          <span class="mirror-label" id="mirror-label"></span>
+        </div>
+      </div>
+
+      <!-- 3. Catch Angel -->
+      <div class="game" id="g-dog">
+        <div class="game-head"><h3 id="dog-title"></h3><p id="dog-text"></p></div>
+        <div class="yard" id="yard">
+          <button class="dog" id="dog" aria-label="Angel">🐕</button>
+          <span class="bark" id="bark"></span>
+        </div>
+        <div class="game-status" id="dog-status"></div>
+      </div>
+
+      <!-- 4. Chores balloons -->
+      <div class="game" id="g-balloons">
+        <div class="game-head"><h3 id="balloons-title"></h3><p id="balloons-text"></p></div>
+        <div class="sky" id="sky"></div>
+        <div class="game-status" id="balloons-status"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-head">
+      <h2 id="quiz-title"></h2>
+      <p id="quiz-lead"></p>
+    </div>
+    <div class="quiz-card">
+      <div id="quiz-body">
+        <div class="quiz-progress"><span id="q-index"></span><span id="q-score"></span></div>
+        <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="reveal" id="reveal" style="display:none"></div>
+        <div class="quiz-actions"><button class="btn" id="next-btn" style="display:none"></button></div>
+      </div>
+      <div id="quiz-result" class="result" style="display:none">
+        <div class="score" id="score"></div>
+        <p id="result-text"></p>
+        <button class="btn ghost" id="retry-btn"></button>
+        <a class="btn yolk" id="goto-venue" href="#venue-section" style="display:none"></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="venue-section">
+    <div class="section-head">
+      <h2 id="venue-title"></h2>
+    </div>
+    <div class="venue locked" id="venue">
+      <div class="lock-msg">🔒 <span id="lock-text"></span></div>
+      <div class="ticket">
+        <div class="ticket-top">
+          <span class="kicker" id="venue-kicker"></span>
+          <h3 id="venue-name"></h3>
+          <div class="sub" id="venue-sub"></div>
+          <div class="egg" aria-hidden="true">🍳</div>
+        </div>
+        <div class="ticket-tear"></div>
+        <div class="ticket-body">
+          <div class="ticket-row">
+            <div class="ticket-cell"><div class="lbl" id="date-label"></div><div class="val" id="date-value"></div></div>
+            <div class="ticket-cell"><div class="lbl" id="time-label"></div><div class="val time" id="time-value"></div></div>
+          </div>
+          <div class="ticket-address">📍 <span id="venue-address"></span></div>
+          <p class="ticket-note" id="venue-note"></p>
+          <div class="ticket-actions">
+            <a class="btn yolk" id="waze-link" target="_blank" rel="noopener"></a>
+            <a class="btn ghost" id="maps-link" target="_blank" rel="noopener"></a>
+          </div>
+          <a class="btn menu-link" id="menu-link" href="https://cdn.shopify.com/s/files/1/0531/3953/8111/files/1.pdf?v=1785674929" target="_blank" rel="noopener"></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <img class="footer-photo" src="assets/images/benedict-ashdod.jpg" alt="Benedict Ashdod">
+    <a href="https://www.benedict.co.il/" target="_blank" rel="noopener" class="footer-logo">
+      <img src="assets/images/benedict-logo.png" alt="Benedict">
+    </a>
+    <div><span id="footer-text"></span> 💛</div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/games.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
