@@ -97,7 +97,7 @@ window.PARTY_CONFIG = {
     calendar: { google: "Google Calendar 📅", apple: "הוסף ליומן 📅", event: "יום ההולדת של לרה – ברנץ' בבנדיקט" },
     sfxOn: "🔊", sfxOff: "🔇",
     menuLink: "לתפריט של בנדיקט 📄",
-    footer: "נבנה באהבה למשפחה",
+    footer: "נבנה באהבה",
     langSwitch: "Русский"
   },
 
@@ -169,7 +169,7 @@ window.PARTY_CONFIG = {
     calendar: { google: "Google Calendar 📅", apple: "Добавить в календарь 📅", event: "День рождения Леры – бранч в Benedict" },
     sfxOn: "🔊", sfxOff: "🔇",
     menuLink: "Меню Benedict 📄",
-    footer: "Сделано с любовью для семьи",
+    footer: "Сделано с любовью",
     langSwitch: "עברית"
   }
 };
